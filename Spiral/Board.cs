@@ -9,27 +9,51 @@ namespace Spiral
 {
     public class Board
     {
-        private int boardSize = 5;
-        public int[][] Cells = new int[5][];
-        private int x;
-        private int y;
+        public int[][] Cells;
+        public string boardString;
+        private int rows;
+        private int cols;
+
+        public override string ToString()
+        {
+            return boardString;
+        }
 
         static void Main(string[] args)
         {
+            var board = new Board(6, 2);
+            Console.WriteLine(board);
         }
-        public Board(int x, int y)
-        {
-            Cells[0] = new int[5];
-            for (int i = 0; i < Cells.Length; i++)
-            {
-                var Col = Cells[0];
-                Col = new int[Cells.Length];
-                Col[i] = i;
 
-                Console.WriteLine();
+        public Board(int rows, int cols)
+        {
+            boardString = "";
+            this.rows = rows;
+            this.cols = cols;
+            Cells = new int[rows][];
+            Cells[0] = new int[cols];
+            var Col = Cells[0];
+            Col = new int[Cells.Length];
+
+            for (int i = 0; i < rows; i++)
+            {
+                Col[i] = i;
+                for (int j = 0; j < cols; j++)
+                {
+                    if ((i + j) % 2 == 0)
+                    {
+                        boardString += (" ");
+                        Console.Write(" ");
+                    }
+                    else
+                    {
+                        boardString += ("#");
+                        Console.Write("#");
+                    }
+                }
+                boardString += ("\n");
+                Console.Write("\n");
             }
-            this.x = x;
-            this.y = y;
         }
     }
 }
